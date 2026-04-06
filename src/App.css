@@ -1,0 +1,34 @@
+:root {
+  --accent-c: #ba6225;
+  --bg-dark: #111827;
+  --bg-blue: #d4d4d4;
+  --white: #d4d4d4;
+}
+body {
+  background-color: var(--bg-blue);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+}
+label {
+  color: var(--accent-c);
+}
+button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--accent-c);
+}
+
+button:hover {
+  box-shadow: inset 0 0 10px var(--white);
+}
+.margin-top-1 {
+  margin-top: 1rem;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}

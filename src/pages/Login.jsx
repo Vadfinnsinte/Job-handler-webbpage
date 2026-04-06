@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signInUser } from "../services/authLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const signIn = async () => {
+    try {
+      // add loader..
+      const data = await signInUser(email, password);
+      navigate("/feed");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   return (
     <div className="sign-up-in-layout">
@@ -34,7 +44,7 @@ const Login = () => {
           </div>
 
           <div className="flex margin-top-1">
-            <button>Sign in</button>
+            <button onClick={signIn}>Sign in</button>
             <div className="btn-line-container">
               <div className="line"></div>
               <p>or</p>

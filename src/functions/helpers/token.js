@@ -1,6 +1,7 @@
-export const saveToken = (token, expire) => {
+export const saveToken = (token, expire, user) => {
   sessionStorage.setItem("token", token);
   sessionStorage.setItem("tokenExpiration", expire);
+  sessionStorage.setItem("user", user);
 };
 
 export const getToken = () => {
@@ -13,4 +14,5 @@ export const getTokenExpiration = () => {
 export const removeToken = () => {
   sessionStorage.removeItem("token");
   sessionStorage.removeItem("tokenExpiration");
+  sessionStorage.removeItem("user");
 };

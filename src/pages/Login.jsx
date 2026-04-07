@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInUser } from "../services/authLogin";
+import InputLabel from "../components/InputLabel";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [btnTxT, setbtnTxT] = useState("Sign in")
 
   const navigate = useNavigate();
   const signIn = async () => {
     try {
-      // add loader..
+		setbtnTxT("Signing in..")
       const data = await signInUser(email, password);
+	  setbtnTxT("Sign in")
       navigate("/feed");
     } catch (err) {
       console.log(err.message);
@@ -23,28 +26,10 @@ const Login = () => {
       <div className="sign-up-in-container ">
         <div className="input-label-layout">
           <h2>Sign in</h2>
-          <div className="input-label-container">
-            <label htmlFor="email">Email:</label>
-            <input
-              id="email"
-              type="text"
-              placeholder="user@company.se"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="input-label-container">
-            <label htmlFor="password">Password:</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
+		  <InputLabel type={"text"} labelTxt={"Email"} value={email} setValue={setEmail}/>
+		  <InputLabel type={"password"} labelTxt={"Password"} value={password} setValue={setPassword}/>
           <div className="flex margin-top-1">
-            <button onClick={signIn}>Sign in</button>
+            <button onClick={signIn}>{btnTxT}</button>
             <div className="btn-line-container">
               <div className="line"></div>
               <p>or</p>

@@ -37,3 +37,9 @@
   display: flex;
   flex-direction: column;
 }
+
+.error {
+  text-align: center;
+  color: var(--accent-c);
+  font-size: 10px;
+}

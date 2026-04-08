@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import { getPosts } from "../services/posts";
 import { storeHooks } from "../store/storeHooks";
+import ShowPost from "../components/ShowPost";
 
 const FeedPage = () => {
   const { setPosts, posts } = storeHooks();
@@ -47,6 +48,7 @@ const FeedPage = () => {
         <div className="content-center">
           <div className="row-between margin-b1">
             <button>+Add</button>
+            {/* add conditional for add post  */}
             <select value={sort} onChange={handleSortChange}>
               <option value="newest">Newest</option>
               <option value="status">Status</option>
@@ -60,6 +62,8 @@ const FeedPage = () => {
               posts.map((post) => <PostCard key={post.id} post={post} />)
             )}
           </div>
+          {/* add conditional for chosenPost(display <ShowPost/> when it is not "")  */}
+          {/* add conditonal for edit post so it displays when clicking edit in showPost component  */}
         </div>
       </div>
     </>

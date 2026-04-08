@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authRegister";
+import { signInUser } from "../services/authLogin";
 import InputLabel from "../components/InputLabel";
 
 const Register = () => {
@@ -19,9 +20,10 @@ const Register = () => {
       setError("");
       setbtnTxT("Signing up...");
 
-      await registerUser(email, password, userName, name);
+     await registerUser(email, password, userName, name);
+     await signInUser(email, password);
 
-      navigate("/");
+     navigate("/feed");
     } catch (err) {
       let message = err.message;
       message = message.replace(/[\[\]"]/g, "");

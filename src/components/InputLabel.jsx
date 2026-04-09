@@ -1,14 +1,14 @@
-const InputLabel = ({type, labelTxt, value, setValue}) => {
+const InputLabel = ({type, labelTxt, value, setValue, placeholder}) => {
 
 	return (
 		<div className="input-label-container">
-            <label htmlFor="email">{labelTxt}</label>
+            <label htmlFor={labelTxt}>{labelTxt}</label>
             <input
-              id="email"
+              id={labelTxt}
               type={type}
-              
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              placeholder={placeholder}
             />
           </div>
 	)

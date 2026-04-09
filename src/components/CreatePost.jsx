@@ -2,7 +2,7 @@ import { useState } from "react"
 import { createPost } from "../services/postService"
 import InputLabel from "./InputLabel"
 
-export default function CreatePost() {
+const CreatePost = ({ closePost, showToast }) => {
 
   const [title, setTitle] = useState("")
   const [companyName, setCompanyName] = useState("")
@@ -24,16 +24,10 @@ export default function CreatePost() {
     }
 
     try {
-      await createPost(newPost)
+  await createPost(newPost)
 
-      setTitle("")
-      setCompanyName("")
-      setLink("")
-      setStatus("")
-      setAdText("")
-      setApplicationDate("")
-
-      alert("Post created!")
+    closePost()
+    showToast()
 
     } catch (error) {
       console.error(error)
@@ -41,6 +35,10 @@ export default function CreatePost() {
   }
 
   return (
+    <div className="create-post-overlay">
+
+    <div className="sign-up-in-layout">
+
     <form onSubmit={handleSubmit}>
     <div className="sign-up-in-container">
     <h2>Create Job Application</h2>
@@ -64,5 +62,8 @@ export default function CreatePost() {
     <button type="submit">Create Post</button>
     </div>
     </form>
+    </div>
+    </div>
   )
 }
+export default CreatePost

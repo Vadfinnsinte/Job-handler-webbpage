@@ -34,3 +34,21 @@
     margin: 0 auto;
   }
 }
+
+/* Show Post  */
+.show-info {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background-color: var(--bg-dark);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  color: var(--white);
+  h1 {
+    color: var(--accent-c);
+  }
+}

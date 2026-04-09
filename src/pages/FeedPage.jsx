@@ -5,7 +5,7 @@ import { storeHooks } from "../store/storeHooks";
 import ShowPost from "../components/ShowPost";
 
 const FeedPage = () => {
-  const { setPosts, posts } = storeHooks();
+  const { setPosts, posts, chosenPost } = storeHooks();
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
@@ -62,6 +62,7 @@ const FeedPage = () => {
               posts.map((post) => <PostCard key={post.id} post={post} />)
             )}
           </div>
+          <div className="absolut">{chosenPost !== null && <ShowPost />}</div>
           {/* add conditional for chosenPost(display <ShowPost/> when it is not "")  */}
           {/* add conditonal for edit post so it displays when clicking edit in showPost component  */}
         </div>

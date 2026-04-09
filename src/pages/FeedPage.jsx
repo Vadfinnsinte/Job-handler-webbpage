@@ -62,7 +62,7 @@ const FeedPage = () => {
               posts.map((post) => <PostCard key={post.id} post={post} />)
             )}
           </div>
-          <div className="absolut">{chosenPost !== null && <ShowPost />}</div>
+          {chosenPost !== null && <ShowPost />}
           {/* add conditional for chosenPost(display <ShowPost/> when it is not "")  */}
           {/* add conditonal for edit post so it displays when clicking edit in showPost component  */}
         </div>

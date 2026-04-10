@@ -149,9 +149,11 @@ const FeedPage = () => {
         )}
         <div className="content-center">
           {addingAdmin && (
-            <div className="show-info">
-              {" "}
-              <Register />{" "}
+            <div className="create-post-overlay">
+              <div className="show-info">
+                {" "}
+                <Register />{" "}
+              </div>
             </div>
           )}
           {addedAdminUser && (

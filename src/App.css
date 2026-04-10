@@ -37,6 +37,9 @@ button:hover {
 .margin-b1 {
   margin-bottom: 1rem;
 }
+.margin-r1 {
+  margin-right: 1rem;
+}
 
 .text-end {
   text-align: end;
@@ -76,4 +79,3 @@ button:hover {
 .just-self-s {
   justify-self: start;
 }
-

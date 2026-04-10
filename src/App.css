@@ -63,6 +63,8 @@ button:hover {
 }
 .big-input {
   /* margin: 0 2rem 2rem 2rem; */
+  min-height: 4rem;
+  margin-bottom: 1rem;
   resize: none;
   border-radius: 0.5rem;
   background-color: var(--white);

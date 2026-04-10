@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authRegister";
 import { signInUser } from "../services/authLogin";
 import InputLabel from "../components/InputLabel";
+import { storeHooks } from "../store/storeHooks";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,9 @@ const Register = () => {
   const [btnTxT, setbtnTxT] = useState("Sign up");
   const [error, setError] = useState("");
 
+  const { addingAdmin, setAddingAdmin, isAdmin, setAddedAdminUser } =
+    storeHooks();
+
   const navigate = useNavigate();
 
   const registerNewUser = async () => {
@@ -20,10 +24,16 @@ const Register = () => {
       setError("");
       setbtnTxT("Signing up...");
 
-     await registerUser(email, password, userName, name);
-     await signInUser(email, password);
+      await registerUser(email, password, userName, name, addingAdmin, isAdmin);
+      await signInUser(email, password);
 
-     navigate("/feed");
+      if (!addingAdmin && !isAdmin) {
+        navigate("/feed");
+      } else {
+        setAddingAdmin(false);
+
+        setAddedAdminUser(true);
+      }
     } catch (err) {
       let message = err.message;
       message = message.replace(/[\[\]"]/g, "");
@@ -35,10 +45,10 @@ const Register = () => {
 
   return (
     <div className="sign-up-in-layout">
-      <h1>Job handler</h1>
+      {!addingAdmin && <h1>Job handler</h1>}
       <div className="sign-up-in-container ">
         <div className="input-label-layout">
-          <h2>Register</h2>
+          <h2>Register{addingAdmin && " Admin"}</h2>
           <InputLabel
             type={"email"}
             labelTxt={"Email"}
@@ -75,15 +85,25 @@ const Register = () => {
               ))}
             </div>
           )}
-          <div className="flex margin-top-1">
-            <button onClick={registerNewUser}>{btnTxT}</button>
-            <div className="btn-line-container">
-              <div className="line"></div>
-              <p>or</p>
-              <div className="line"></div>
+          {!addingAdmin ? (
+            <div className="flex margin-top-1">
+              <button onClick={registerNewUser}>{btnTxT}</button>
+              <div className="btn-line-container">
+                <div className="line"></div>
+                <p>or</p>
+                <div className="line"></div>
+              </div>
+              <button onClick={() => navigate("/")}>Sign in</button>
             </div>
-            <button onClick={() => navigate("/")}>Sign in</button>
-          </div>
+          ) : (
+            <div className="flex margin-top-1">
+              <button className="margin-b1" onClick={registerNewUser}>
+                Create
+              </button>
+
+              <button onClick={() => setAddingAdmin(false)}>Close</button>
+            </div>
+          )}
         </div>
       </div>
     </div>

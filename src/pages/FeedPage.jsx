@@ -3,12 +3,33 @@ import PostCard from "../components/PostCard";
 import { getPosts } from "../services/posts";
 import { storeHooks } from "../store/storeHooks";
 import ShowPost from "../components/ShowPost";
+import { getRole, removeToken } from "../functions/helpers/token";
+import { useNavigate } from "react-router-dom";
+import Register from "./Register";
 
 const FeedPage = () => {
-  const { setPosts, posts, chosenPost } = storeHooks();
+  const {
+    setPosts,
+    posts,
+    chosenPost,
+    addingAdmin,
+    setAddingAdmin,
+    isAdmin,
+    setIsAdmin,
+    addedAdminUser,
+    setAddedAdminUser,
+  } = storeHooks();
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
+
+  const navigate = useNavigate();
+  const role = getRole();
+  const signOutUser = () => {
+    setIsAdmin(false);
+    removeToken();
+    navigate("/");
+  };
 
   const handleSortChange = (e) => {
     const value = e.target.value;
@@ -29,6 +50,11 @@ const FeedPage = () => {
     setPosts(sortedPosts);
   };
   useEffect(() => {
+    if (role?.roles?.[0] === "Admin") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
     const getUserPosts = async () => {
       try {
         setLoading(true);
@@ -44,11 +70,36 @@ const FeedPage = () => {
   return (
     <>
       <div className="feed-layout">
-        <h1>Job Handler</h1>
+        <div className="header">
+          {isAdmin && (
+            <div className=" just-self-s">
+              <button onClick={() => setAddingAdmin(true)}>
+                New admin User
+              </button>
+            </div>
+          )}
+
+          <h1>Job Handler</h1>
+          <div className="just-self-e">
+            <button onClick={signOutUser}>Sign Out</button>
+          </div>
+        </div>
         <div className="content-center">
+          {addingAdmin && (
+            <div className="show-info">
+              {" "}
+              <Register />{" "}
+            </div>
+          )}
+          {addedAdminUser && (
+            <div className="show-info white">
+              <p>User added</p>{" "}
+              <button onClick={() => setAddedAdminUser(false)}>Close</button>
+            </div>
+          )}
           <div className="row-between margin-b1">
             <button>+Add</button>
-            {/* add conditional for add post  */}
+
             <select value={sort} onChange={handleSortChange}>
               <option value="newest">Newest</option>
               <option value="status">Status</option>

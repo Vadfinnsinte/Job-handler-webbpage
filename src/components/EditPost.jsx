@@ -47,7 +47,7 @@ const EditPost = ({ closePost, chosenPost, setChosenPost }) => {
   
 
   return (
-    <div className="show-info">
+    <div className="show-info edit-post">
       <h2>Edit post</h2>
 
       <form onSubmit={handleSubmit}>

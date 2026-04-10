@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
+import AdminUserList from "../components/AdminUsers";
 import { getPosts } from "../services/posts";
 import { storeHooks } from "../store/storeHooks";
 import CreatePost from "../components/CreatePost";
@@ -28,6 +29,7 @@ const FeedPage = () => {
   const [savedChanges, setSavedChanges] = useState(false);
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
+  const [showAdminList, setShowAdminList] = useState(false);
   const [user, setUser] = useState("");
 
   // Fetch posts
@@ -102,6 +104,7 @@ const FeedPage = () => {
     };
     getUserPosts();
   }, []);
+
   return (
     <>
       <div className="feed-layout">
@@ -111,7 +114,11 @@ const FeedPage = () => {
               <button onClick={() => setAddingAdmin(true)}>
                 New admin User
               </button>
+              <button onClick={() => setShowAdminList(true)}>
+                User List
+              </button>
             </div>
+            
           )}
 
           <h1>Job Handler</h1>
@@ -137,6 +144,11 @@ const FeedPage = () => {
             )}
           </div>
         </div>
+        {showAdminList && (
+        <div className="show-info">
+          <AdminUserList closeList={() => setShowAdminList(false)} />
+        </div>
+)}
         <div className="content-center">
           {addingAdmin && (
             <div className="show-info">

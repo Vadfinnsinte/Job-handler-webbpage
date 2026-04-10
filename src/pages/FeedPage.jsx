@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import Register from "./Register";
 
 const FeedPage = () => {
-
   const [openAddPost, setOpenAddPost] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const {
@@ -28,22 +27,22 @@ const FeedPage = () => {
   const [errorTxt, setErrorTxt] = useState("Loading...");
 
   // Fetch posts
-//   const fetchPosts = async () => {
-//     try {
-//       setLoading(true);
-//       const data = await getPosts();
-//       setPosts(data);
-//     } catch (error) {
-//       setErrorTxt("Failed to load posts");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const data = await getPosts();
+      setPosts(data);
+    } catch (error) {
+      setErrorTxt("Failed to load posts");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Load posts when page loads
-//   useEffect(() => {
-//     fetchPosts();
-//   }, []);
+  //   useEffect(() => {
+  //     fetchPosts();
+  //   }, []);
 
   // Toast timer
   useEffect(() => {
@@ -70,7 +69,7 @@ const FeedPage = () => {
 
     if (value === "newest") {
       sortedPosts.sort(
-        (a, b) => new Date(b.applicationDate) - new Date(a.applicationDate)
+        (a, b) => new Date(b.applicationDate) - new Date(a.applicationDate),
       );
     } else if (value === "a-z") {
       sortedPosts.sort((a, b) => a.title.localeCompare(b.title));
@@ -136,14 +135,13 @@ const FeedPage = () => {
               <option value="status">Status</option>
               <option value="a-z">A-Z</option>
             </select>
-
           </div>
 
           {openAddPost && (
             <CreatePost
               closePost={() => setOpenAddPost(false)}
               showToast={() => setShowToast(true)}
-              refreshFeed={getUserPosts}
+              refreshFeed={fetchPosts}
             />
           )}
 

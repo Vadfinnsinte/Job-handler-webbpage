@@ -11,8 +11,7 @@ body {
   background-color: var(--bg-blue);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-input 
-{
+input {
   padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: var(--white);
@@ -60,6 +59,7 @@ button:hover {
   resize: none;
   border-radius: 0.5rem;
   background-color: var(--white);
+}
 .flex-end {
   place-self: end;
 }

@@ -9,6 +9,7 @@ import { getRole, removeToken } from "../functions/helpers/token";
 import { useNavigate } from "react-router-dom";
 import Register from "./Register";
 import EditUser from "../components/EditUser";
+import EditPost from "../components/EditPost";
 
 const FeedPage = () => {
   const [openAddPost, setOpenAddPost] = useState(false);
@@ -16,13 +17,18 @@ const FeedPage = () => {
   const {
     setPosts,
     posts,
+    openPost,
+    setOpenPost,
     chosenPost,
+    setChosenPost,
     addingAdmin,
     setAddingAdmin,
     isAdmin,
     setIsAdmin,
     addedAdminUser,
     setAddedAdminUser,
+    showEdit,
+    setShowEdit,
   } = storeHooks();
   const [editUser, setEditUser] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -44,11 +50,6 @@ const FeedPage = () => {
       setLoading(false);
     }
   };
-
-  // Load posts when page loads
-  //   useEffect(() => {
-  //     fetchPosts();
-  //   }, []);
 
   // Toast timer
   useEffect(() => {
@@ -114,11 +115,8 @@ const FeedPage = () => {
               <button onClick={() => setAddingAdmin(true)}>
                 New admin User
               </button>
-              <button onClick={() => setShowAdminList(true)}>
-                User List
-              </button>
+              <button onClick={() => setShowAdminList(true)}>User List</button>
             </div>
-            
           )}
 
           <h1>Job Handler</h1>
@@ -145,10 +143,10 @@ const FeedPage = () => {
           </div>
         </div>
         {showAdminList && (
-        <div className="show-info">
-          <AdminUserList closeList={() => setShowAdminList(false)} />
-        </div>
-)}
+          <div className="show-info">
+            <AdminUserList closeList={() => setShowAdminList(false)} />
+          </div>
+        )}
         <div className="content-center">
           {addingAdmin && (
             <div className="show-info">
@@ -188,7 +186,15 @@ const FeedPage = () => {
             )}
           </div>
 
-          {chosenPost !== null && <ShowPost />}
+          {openPost && <ShowPost />}
+          {showEdit && (
+            <EditPost
+              closePost={() => setShowEdit(false)}
+              chosenPost={chosenPost}
+              setChosenPost={setChosenPost}
+              fetchPosts={fetchPosts}
+            />
+          )}
         </div>
       </div>
 

@@ -8,11 +8,11 @@ const ShowPost = () => {
   const [commentInput, setCommentInput] = useState("");
   const [comment, setComment] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
+
   const [addingComment, setAddingComment] = useState(false);
   const [commentAdded, setCommentAdded] = useState(false);
-  const { chosenPost, setChosenPost } = storeHooks();
- 
+  const { chosenPost, setChosenPost, setOpenPost, showEdit, setShowEdit } =
+    storeHooks();
 
   useEffect(() => {
     const getPostsComments = async () => {
@@ -51,7 +51,7 @@ const ShowPost = () => {
     <div className="show-info">
       {/* add x to  close show, also reset chosenPost to "" when closing */}
       <div className="flex-end">
-        <button onClick={() => setChosenPost(null)}>X</button>
+        <button onClick={() => setOpenPost(false)}>X</button>
       </div>
       <div className="center">
         <h1>{chosenPost.title}</h1>
@@ -105,28 +105,20 @@ const ShowPost = () => {
             <button onClick={() => setCommentAdded(false)}>Close</button>
           </div>
         )}
-        
       </div>
 
       <p>Status: {chosenPost.status}</p>
 
-      <button onClick={() => setShowEdit(true)}>
+      <button
+        onClick={() => {
+          setShowEdit(true);
+          setOpenPost(false);
+        }}
+      >
         Edit post
       </button>
-        <div >
-      
-
-        {showEdit && (
-        <EditPost
-          closePost={() => setShowEdit(false)}
-          chosenPost={chosenPost}
-          setChosenPost={setChosenPost}
-        />
-  )}
-
-</div>
+      <div></div>
     </div>
-
   );
 };
 

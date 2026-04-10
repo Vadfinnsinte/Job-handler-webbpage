@@ -90,6 +90,7 @@
 }
 /* Show Post  */
 .show-info {
+  min-width: 80%;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -113,6 +114,23 @@
   background-color: var(--white);
   color: var(--accent-c);
   overflow: hidden;
+}
+.show-info.red-small {
+  background-color: rgb(114, 26, 5);
+}
+.show-info.red-small label {
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+}
+.show-info.red-small button {
+  background-color: var(--bg-dark);
+  color: var(--white);
+  border: none;
+  padding: 1rem;
+}
+.show-info.red-small button:last-child {
+  background-color: var(--accent-c);
 }
 .show-info.no-overflow {
   overflow: hidden;
@@ -148,7 +166,9 @@
   scrollbar-width: thin;
   scrollbar-color: #666 transparent;
 }
-
+.edit-post {
+  min-width: 80%;
+}
 .edit-post form {
   display: flex;
   flex-direction: column;
@@ -166,103 +186,101 @@
   padding: 0.75rem;
 }
 
-
-
-
 .admin-user-list {
-    width: 100%;
-    max-width: 900px;
+  width: 100%;
+  max-width: 900px;
 }
 
 .admin-user-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .table-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .styled-table {
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 0.95em;
-    font-family: sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #1f1f1f;
-    color: white;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95em;
+  font-family: sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #1f1f1f;
+  color: white;
 }
 
 .styled-table thead tr {
-    background-color: #ba6225;
-    color: #ffffff;
-    text-align: left;
+  background-color: #ba6225;
+  color: #ffffff;
+  text-align: left;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
-    word-break: break-word;
+  padding: 12px 15px;
+  word-break: break-word;
 }
 
 .styled-table tbody tr {
-    background-color: #111827;
+  background-color: #111827;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #ba6225;
+  background-color: #ba6225;
 }
-
-
 
 @media (max-width: 700px) {
-    .styled-table,
-    .styled-table thead,
-    .styled-table tbody,
-    .styled-table th,
-    .styled-table td,
-    .styled-table tr {
-        display: block;
-        width: 100%;
-    }
+  .styled-table,
+  .styled-table thead,
+  .styled-table tbody,
+  .styled-table th,
+  .styled-table td,
+  .styled-table tr {
+    display: block;
+    width: 100%;
+  }
 
-    .styled-table thead {
-        display: none;
-    }
+  .styled-table thead {
+    display: none;
+  }
 
-    .styled-table tbody tr {
-        margin-bottom: 1rem;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    }
+  .styled-table tbody tr {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
 
-    .styled-table td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        text-align: right;
-        padding: 12px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
+  .styled-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    text-align: right;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
 
-    .styled-table td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        color: #ffb07a;
-        text-align: left;
-        flex-shrink: 0;
-    }
+  .styled-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #ffb07a;
+    text-align: left;
+    flex-shrink: 0;
+  }
 
-    .styled-table td:last-child {
-        border-bottom: none;
-    }
+  .styled-table td:last-child {
+    border-bottom: none;
+  }
 }
-
+.error-d {
+  color: var(--white);
+  text-align: center;
+}

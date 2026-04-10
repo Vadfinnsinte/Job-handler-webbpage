@@ -6,17 +6,27 @@ import InputLabel from "../components/InputLabel";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [btnTxT, setbtnTxT] = useState("Sign in")
+
+  const [btnTxT, setbtnTxT] = useState("Sign in");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
   const signIn = async () => {
     try {
-		setbtnTxT("Signing in..")
-      const data = await signInUser(email, password);
-	  setbtnTxT("Sign in")
+      setError("");
+      setbtnTxT("Signing in..");
+
+      await signInUser(email, password);
+      setbtnTxT("Sign in");
+
       navigate("/feed");
     } catch (err) {
-      console.log(err.message);
+      let message = err.message;
+      message = message.replace(/[\[\]"]/g, "");
+      setError(message);
+    } finally {
+      setbtnTxT("Sign up");
     }
   };
 
@@ -26,8 +36,25 @@ const Login = () => {
       <div className="sign-up-in-container ">
         <div className="input-label-layout">
           <h2>Sign in</h2>
-		  <InputLabel type={"text"} labelTxt={"Email"} value={email} setValue={setEmail}/>
-		  <InputLabel type={"password"} labelTxt={"Password"} value={password} setValue={setPassword}/>
+          <InputLabel
+            type={"text"}
+            labelTxt={"Email"}
+            value={email}
+            setValue={setEmail}
+          />
+          <InputLabel
+            type={"password"}
+            labelTxt={"Password"}
+            value={password}
+            setValue={setPassword}
+          />
+          {error && (
+            <div className="error">
+              {error.split(",").map((part, index) => (
+                <p key={index}>{part.trim()}</p>
+              ))}
+            </div>
+          )}
           <div className="flex margin-top-1">
             <button onClick={signIn}>{btnTxT}</button>
             <div className="btn-line-container">

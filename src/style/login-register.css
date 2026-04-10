@@ -12,6 +12,7 @@
   background-color: var(--bg-dark);
   padding: 1rem 3rem 3rem 3rem;
   border-radius: 6px;
+  position: relative;
   h2 {
     text-align: center;
     color: var(--accent-c);
@@ -42,4 +43,7 @@
   text-align: center;
   color: var(--accent-c);
   font-size: 10px;
+}
+.invisible {
+  visibility: hidden;
 }

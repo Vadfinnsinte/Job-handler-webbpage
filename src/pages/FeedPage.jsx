@@ -2,13 +2,68 @@ import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import { getPosts } from "../services/posts";
 import { storeHooks } from "../store/storeHooks";
+import CreatePost from "../components/CreatePost";
 import ShowPost from "../components/ShowPost";
+import { getRole, removeToken } from "../functions/helpers/token";
+import { useNavigate } from "react-router-dom";
+import Register from "./Register";
+import EditUser from "../components/EditUser";
 
 const FeedPage = () => {
-  const { setPosts, posts, chosenPost } = storeHooks();
+  const [openAddPost, setOpenAddPost] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const {
+    setPosts,
+    posts,
+    chosenPost,
+    addingAdmin,
+    setAddingAdmin,
+    isAdmin,
+    setIsAdmin,
+    addedAdminUser,
+    setAddedAdminUser,
+  } = storeHooks();
+  const [editUser, setEditUser] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [savedChanges, setSavedChanges] = useState(false);
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
+  const [user, setUser] = useState("");
+
+  // Fetch posts
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const data = await getPosts();
+      setPosts(data);
+    } catch (error) {
+      setErrorTxt("Failed to load posts");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Load posts when page loads
+  //   useEffect(() => {
+  //     fetchPosts();
+  //   }, []);
+
+  // Toast timer
+  useEffect(() => {
+    if (showToast) {
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    }
+  }, [showToast]);
+
+  const navigate = useNavigate();
+  const role = getRole();
+  const signOutUser = () => {
+    setIsAdmin(false);
+    removeToken();
+    navigate("/");
+  };
 
   const handleSortChange = (e) => {
     const value = e.target.value;
@@ -29,6 +84,12 @@ const FeedPage = () => {
     setPosts(sortedPosts);
   };
   useEffect(() => {
+    setUser(role.name);
+    if (role?.roles?.[0] === "Admin") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
     const getUserPosts = async () => {
       try {
         setLoading(true);
@@ -44,17 +105,69 @@ const FeedPage = () => {
   return (
     <>
       <div className="feed-layout">
-        <h1>Job Handler</h1>
+        <div className="header">
+          {isAdmin && (
+            <div className=" just-self-s">
+              <button onClick={() => setAddingAdmin(true)}>
+                New admin User
+              </button>
+            </div>
+          )}
+
+          <h1>Job Handler</h1>
+          <div className="just-self-e row-between">
+            <p className="user-edit" onClick={() => setEditUser(true)}>
+              {user}
+              <span>✎</span>
+            </p>
+            <div className="self-center">
+              <button onClick={signOutUser}>Sign Out</button>
+            </div>
+            {editUser && (
+              <EditUser
+                setEditUser={setEditUser}
+                setSavedChanges={setSavedChanges}
+                setUser={setUser}
+              />
+            )}
+            {savedChanges && (
+              <div className="show-info white">
+                <p>Changes saved</p>
+              </div>
+            )}
+          </div>
+        </div>
         <div className="content-center">
+          {addingAdmin && (
+            <div className="show-info">
+              {" "}
+              <Register />{" "}
+            </div>
+          )}
+          {addedAdminUser && (
+            <div className="show-info white">
+              <p>User added</p>{" "}
+              <button onClick={() => setAddedAdminUser(false)}>Close</button>
+            </div>
+          )}
           <div className="row-between margin-b1">
-            <button>+Add</button>
-            {/* add conditional for add post  */}
+            <button onClick={() => setOpenAddPost(true)}>+Add</button>
+
             <select value={sort} onChange={handleSortChange}>
               <option value="newest">Newest</option>
               <option value="status">Status</option>
               <option value="a-z">A-Z</option>
             </select>
           </div>
+
+          {openAddPost && (
+            <CreatePost
+              closePost={() => setOpenAddPost(false)}
+              showToast={() => setShowToast(true)}
+              refreshFeed={fetchPosts}
+            />
+          )}
+
           <div>
             {loading ? (
               <p className="center">{errorTxt}</p>
@@ -62,11 +175,12 @@ const FeedPage = () => {
               posts.map((post) => <PostCard key={post.id} post={post} />)
             )}
           </div>
+
           {chosenPost !== null && <ShowPost />}
-          {/* add conditional for chosenPost(display <ShowPost/> when it is not "")  */}
-          {/* add conditonal for edit post so it displays when clicking edit in showPost component  */}
         </div>
       </div>
+
+      {showToast && <div className="toast">Post created!</div>}
     </>
   );
 };

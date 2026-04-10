@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInUser } from "../services/authLogin";
 import InputLabel from "../components/InputLabel";
+import { storeHooks } from "../store/storeHooks";
+import { getRole } from "../functions/helpers/token";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +11,8 @@ const Login = () => {
 
   const [btnTxT, setbtnTxT] = useState("Sign in");
   const [error, setError] = useState("");
+
+  const { setIsAdmin } = storeHooks();
 
   const navigate = useNavigate();
 
@@ -19,7 +23,10 @@ const Login = () => {
 
       await signInUser(email, password);
       setbtnTxT("Sign in");
-
+      let role = getRole();
+      if (role.roles[0] === "Admin") {
+        setIsAdmin(true);
+      }
       navigate("/feed");
     } catch (err) {
       let message = err.message;

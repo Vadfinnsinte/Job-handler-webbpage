@@ -37,6 +37,7 @@ button:hover {
 .margin-b1 {
   margin-bottom: 1rem;
 }
+
 .text-end {
   text-align: end;
 }
@@ -54,6 +55,12 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
+.big-input {
+  /* margin: 0 2rem 2rem 2rem; */
+  resize: none;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+}
 .flex-end {
   place-self: end;
 }
@@ -62,4 +69,10 @@ button:hover {
 }
 .red {
   background-color: rgb(114, 26, 5);
+}
+.just-self-e {
+  justify-self: end;
+}
+.just-self-s {
+  justify-self: start;
 }

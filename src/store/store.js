@@ -6,4 +6,11 @@ export const store = create((set) => ({
 
   chosenPost: null,
   setChosenPost: (value) => set({ chosenPost: value }),
+
+  addingAdmin: false,
+  setAddingAdmin: (value) => set({ addingAdmin: value }),
+  isAdmin: false,
+  setIsAdmin: (value) => set({ isAdmin: value }),
+  addedAdminUser: false,
+  setAddedAdminUser: (value) => set({ addedAdminUser: value }),
 }));

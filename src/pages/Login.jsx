@@ -33,7 +33,7 @@ const Login = () => {
       message = message.replace(/[\[\]"]/g, "");
       setError(message);
     } finally {
-      setbtnTxT("Sign up");
+      setbtnTxT("Sign in");
     }
   };
 

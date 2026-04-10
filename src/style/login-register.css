@@ -43,3 +43,6 @@
   color: var(--accent-c);
   font-size: 10px;
 }
+.invisible {
+  visibility: hidden;
+}

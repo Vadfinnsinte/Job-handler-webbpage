@@ -22,3 +22,17 @@ export const removeToken = () => {
   sessionStorage.removeItem("tokenExpiration");
   sessionStorage.removeItem("user");
 };
+
+export const updateUserInStorage = (name) => {
+  const user = getRole();
+  if (!user) return null;
+
+  const updatedUser = {
+    ...user,
+    name: name,
+  };
+  sessionStorage.removeItem("user");
+  sessionStorage.setItem("user", JSON.stringify(updatedUser));
+
+  return;
+};

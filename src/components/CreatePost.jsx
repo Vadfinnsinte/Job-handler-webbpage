@@ -2,7 +2,7 @@ import { useState } from "react"
 import { createPost } from "../services/postService"
 import InputLabel from "./InputLabel"
 
-const CreatePost = ({ closePost, showToast }) => {
+const CreatePost = ({ closePost, showToast, refreshFeed }) => {
 
   const [title, setTitle] = useState("")
   const [companyName, setCompanyName] = useState("")
@@ -28,6 +28,7 @@ const CreatePost = ({ closePost, showToast }) => {
 
     closePost()
     showToast()
+    refreshFeed();
 
     } catch (error) {
       console.error(error)
@@ -42,6 +43,13 @@ const CreatePost = ({ closePost, showToast }) => {
     <form onSubmit={handleSubmit}>
     <div className="sign-up-in-container">
     <h2>Create Job Application</h2>
+    <button
+    type="button"
+    className="close-btn"
+    onClick={closePost}
+    >
+      ✕
+    </button>
     
     <div className="input-label-layout">
       <InputLabel type={"text"} labelTxt={"Job Title"} value={title} setValue={setTitle}/>

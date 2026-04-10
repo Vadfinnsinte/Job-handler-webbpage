@@ -60,4 +60,18 @@ button:hover {
   resize: none;
   border-radius: 0.5rem;
   background-color: var(--white);
+.flex-end {
+  place-self: end;
+}
+.self-center {
+  place-self: center;
+}
+.red {
+  background-color: rgb(114, 26, 5);
+}
+.just-self-e {
+  justify-self: end;
+}
+.just-self-s {
+  justify-self: start;
 }

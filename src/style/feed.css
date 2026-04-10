@@ -1,3 +1,13 @@
+.header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+
+  h1 {
+    grid-column: 2;
+  }
+}
+
 .feed-layout {
   display: flex;
   flex-direction: column;
@@ -73,4 +83,61 @@
   color: var(--white);
 
   cursor: pointer;
+
+/* Show Post  */
+.show-info {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  word-break: break-all;
+  top: 50%;
+  left: 50%;
+  max-height: 90%;
+  overflow: scroll;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background-color: var(--bg-dark);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  color: var(--white);
+  h1 {
+    color: var(--accent-c);
+  }
+}
+
+.show-info.white {
+  background-color: var(--white);
+  color: var(--accent-c);
+  overflow: hidden;
+}
+.comment-h-btn {
+  display: flex;
+  place-self: center;
+}
+.comment-h-btn * {
+  margin-right: 1rem;
+}
+
+.comment-container {
+  max-height: 15rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.comment-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.show-info::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.show-info::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 8px;
+}
+
+/* Firefox */
+.show-info {
+  scrollbar-width: thin;
+  scrollbar-color: #666 transparent;
 }

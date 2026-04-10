@@ -1,6 +1,9 @@
+import { storeHooks } from "../store/storeHooks";
+
 const PostCard = ({ post }) => {
+  const { setChosenPost } = storeHooks();
   return (
-    <div className="post-card-container">
+    <div className="post-card-container" onClick={() => setChosenPost(post)}>
       <p>{post.companyName}</p>
       <p className="center">{post.title}</p>
       <p className="text-end">{post.status}</p>

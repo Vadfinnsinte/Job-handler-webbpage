@@ -54,3 +54,12 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
+.flex-end {
+  place-self: end;
+}
+.self-center {
+  place-self: center;
+}
+.red {
+  background-color: rgb(114, 26, 5);
+}

@@ -111,6 +111,40 @@ The application is designed to work on both desktop and mobile devices.
 
 The purpose of this project is to build a fullstack application with a modern frontend that interacts with a secure backend API.
 
-## Authors
+## Contributors 
 
-This project was created as a group assignment.
+Please note: This project was a collaborative effort where all team members contributed across multiple parts of the application, including both frontend components and service logic.
+The list below is only an overview of the areas where each contributor created new files. For a more complete overview, please refer to the commit history.
+
+### Linda 
+
+  - Created base structure
+  - Login.jsx (page)
+  - Feed.jsx (page)
+  - ShowPost.jsx (Component)
+  - EditUser.jsx(Component)
+  - inputlabel.jsx (Component)
+  - PostCard.jsx (Component)
+  - ShowPost.jsx (Component)
+  - authLogin.js 
+  - comment.js
+  - posts.js
+  - user.js
+  - token.js
+
+### Tindra
+- CreatePost.jsx (Component)
+- CreatePostPage.jsx (page)
+- postService.js
+
+
+### Natalie
+  - Register (page)
+  - EditPost (Component)
+  - AdminUsers (Components)
+  - userAdmin.js
+  - editPost.js
+  - authRegister.js
+
+
+

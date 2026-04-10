@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import InputLabel from "./InputLabel";
 import { storeHooks } from "../store/storeHooks";
 import { addComment, getComment } from "../services/comment";
+import EditPost from "./EditPost";
 
 const ShowPost = () => {
   const [commentInput, setCommentInput] = useState("");
   const [comment, setComment] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const [addingComment, setAddingComment] = useState(false);
   const [commentAdded, setCommentAdded] = useState(false);
   const { chosenPost, setChosenPost } = storeHooks();
+ 
 
   useEffect(() => {
     const getPostsComments = async () => {
@@ -33,7 +36,6 @@ const ShowPost = () => {
     if (commentInput !== "") {
       try {
         await addComment(chosenPost.userId, chosenPost.id, commentInput);
-        // kolla med Natalie om felhantring på comment
         await fetchComments();
         setAddingComment(false);
         setCommentAdded(true);
@@ -103,11 +105,28 @@ const ShowPost = () => {
             <button onClick={() => setCommentAdded(false)}>Close</button>
           </div>
         )}
+        
       </div>
 
       <p>Status: {chosenPost.status}</p>
-      <button>Edit post</button>
+
+      <button onClick={() => setShowEdit(true)}>
+        Edit post
+      </button>
+        <div >
+      
+
+        {showEdit && (
+        <EditPost
+          closePost={() => setShowEdit(false)}
+          chosenPost={chosenPost}
+          setChosenPost={setChosenPost}
+        />
+  )}
+
+</div>
     </div>
+
   );
 };
 

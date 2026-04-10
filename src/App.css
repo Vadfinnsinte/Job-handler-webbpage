@@ -55,6 +55,12 @@ button:hover {
   display: flex;
   flex-direction: column;
 }
+.big-input {
+  /* margin: 0 2rem 2rem 2rem; */
+  resize: none;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+}
 .flex-end {
   place-self: end;
 }

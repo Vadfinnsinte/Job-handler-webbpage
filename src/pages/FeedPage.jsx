@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import { getPosts } from "../services/posts";
 import { storeHooks } from "../store/storeHooks";
+import CreatePost from "../components/CreatePost";
 import ShowPost from "../components/ShowPost";
 import { getRole, removeToken } from "../functions/helpers/token";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,8 @@ import Register from "./Register";
 import EditUser from "../components/EditUser";
 
 const FeedPage = () => {
+  const [openAddPost, setOpenAddPost] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const {
     setPosts,
     posts,
@@ -26,6 +29,34 @@ const FeedPage = () => {
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
   const [user, setUser] = useState("");
+
+  // Fetch posts
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const data = await getPosts();
+      setPosts(data);
+    } catch (error) {
+      setErrorTxt("Failed to load posts");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Load posts when page loads
+  //   useEffect(() => {
+  //     fetchPosts();
+  //   }, []);
+
+  // Toast timer
+  useEffect(() => {
+    if (showToast) {
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+    }
+  }, [showToast]);
+
   const navigate = useNavigate();
   const role = getRole();
   const signOutUser = () => {
@@ -120,7 +151,7 @@ const FeedPage = () => {
             </div>
           )}
           <div className="row-between margin-b1">
-            <button>+Add</button>
+            <button onClick={() => setOpenAddPost(true)}>+Add</button>
 
             <select value={sort} onChange={handleSortChange}>
               <option value="newest">Newest</option>
@@ -128,6 +159,15 @@ const FeedPage = () => {
               <option value="a-z">A-Z</option>
             </select>
           </div>
+
+          {openAddPost && (
+            <CreatePost
+              closePost={() => setOpenAddPost(false)}
+              showToast={() => setShowToast(true)}
+              refreshFeed={fetchPosts}
+            />
+          )}
+
           <div>
             {loading ? (
               <p className="center">{errorTxt}</p>
@@ -135,9 +175,12 @@ const FeedPage = () => {
               posts.map((post) => <PostCard key={post.id} post={post} />)
             )}
           </div>
+
           {chosenPost !== null && <ShowPost />}
         </div>
       </div>
+
+      {showToast && <div className="toast">Post created!</div>}
     </>
   );
 };

@@ -7,7 +7,11 @@
     grid-column: 2;
   }
 }
-
+.user-edit {
+  margin-right: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
 .feed-layout {
   display: flex;
   flex-direction: column;
@@ -108,6 +112,9 @@
 .show-info.white {
   background-color: var(--white);
   color: var(--accent-c);
+  overflow: hidden;
+}
+.show-info.no-overflow {
   overflow: hidden;
 }
 .comment-h-btn {

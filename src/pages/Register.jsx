@@ -25,9 +25,9 @@ const Register = () => {
       setbtnTxT("Signing up...");
 
       await registerUser(email, password, userName, name, addingAdmin, isAdmin);
-      await signInUser(email, password);
 
       if (!addingAdmin && !isAdmin) {
+        await signInUser(email, password);
         navigate("/feed");
       } else {
         setAddingAdmin(false);

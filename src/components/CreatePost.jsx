@@ -10,9 +10,14 @@ const CreatePost = ({ closePost, showToast, refreshFeed }) => {
   const [status, setStatus] = useState("")
   const [adText, setAdText] = useState("")
   const [applicationDate, setApplicationDate] = useState("")
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!title || !companyName || !status || !applicationDate) {
+    setError("Please fill in all required fields");
+  return;
+}
 
     const newPost = {
       title,
@@ -67,6 +72,7 @@ const CreatePost = ({ closePost, showToast, refreshFeed }) => {
       <InputLabel type={"date"} labelTxt={"Application Date"} value={applicationDate} setValue={setApplicationDate}/>
 
     </div>
+    {error && <p className="error">{error}</p>}
     <button type="submit">Create Post</button>
     </div>
     </form>

@@ -182,7 +182,7 @@ const FeedPage = () => {
 
           <div>
             {loading ? (
-              <p className="center">{errorTxt}</p>
+              <p className="center error">{errorTxt}</p>
             ) : (
               posts.map((post) => <PostCard key={post.id} post={post} />)
             )}

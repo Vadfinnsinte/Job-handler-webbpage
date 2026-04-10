@@ -63,3 +63,9 @@ button:hover {
 .red {
   background-color: rgb(114, 26, 5);
 }
+.just-self-e {
+  justify-self: end;
+}
+.just-self-s {
+  justify-self: start;
+}

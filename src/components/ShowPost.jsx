@@ -48,11 +48,16 @@ const ShowPost = () => {
   };
 
   return (
+    <div className="create-post-overlay">
     <div className="show-info">
       {/* add x to  close show, also reset chosenPost to "" when closing */}
-      <div className="flex-end">
-        <button onClick={() => setChosenPost(null)}>X</button>
-      </div>
+      <button
+      type="button"
+      className="close-btn"
+      onClick={() => setChosenPost(null)}
+      >
+        ✕
+      </button>
       <div className="center">
         <h1>{chosenPost.title}</h1>
         <p>{chosenPost.companyName}</p>
@@ -85,8 +90,12 @@ const ShowPost = () => {
               <button className="margin-b1" onClick={addCommentToPost}>
                 Add
               </button>
-              <button className="red" onClick={() => setAddingComment(false)}>
-                Close
+              <button
+              type="button"
+              className="close-btn"
+              onClick={() => setAddingComment(false)}
+              >
+                 ✕
               </button>
             </div>
           )
@@ -102,7 +111,13 @@ const ShowPost = () => {
             >
               Add another
             </button>
-            <button onClick={() => setCommentAdded(false)}>Close</button>
+           <button
+          type="button"
+          className="close-btn"
+          onClick={() => setCommentAdded(false)}
+          >
+            ✕
+          </button>
           </div>
         )}
         
@@ -125,8 +140,8 @@ const ShowPost = () => {
   )}
 
 </div>
-    </div>
-
+</div>
+</div>
   );
 };
 

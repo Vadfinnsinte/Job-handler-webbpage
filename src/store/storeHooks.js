@@ -4,9 +4,14 @@ export const storeHooks = () => {
   const posts = store((state) => state.posts);
   const setPosts = store((state) => state.setPosts);
 
+  const openPost = store((state) => state.openPost);
+  const setOpenPost = store((state) => state.setOpenPost);
+
   const chosenPost = store((state) => state.chosenPost);
   const setChosenPost = store((state) => state.setChosenPost);
 
+  const showEdit = store((state) => state.showEdit);
+  const setShowEdit = store((state) => state.setShowEdit);
   const addingAdmin = store((state) => state.addingAdmin);
   const setAddingAdmin = store((state) => state.setAddingAdmin);
 
@@ -26,5 +31,9 @@ export const storeHooks = () => {
     setIsAdmin,
     addedAdminUser,
     setAddedAdminUser,
+    openPost,
+    setOpenPost,
+    showEdit,
+    setShowEdit,
   };
 };

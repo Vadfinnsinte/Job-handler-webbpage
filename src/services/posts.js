@@ -24,3 +24,27 @@ export const getPosts = async () => {
 
   return data;
 };
+
+export const deletePost = async (id) => {
+  const response = await fetch(`${ConnectionString}/Post/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  if (!response.ok) {
+    if (response.status === 500) {
+      throw new Error("Server error, try again later");
+    }
+
+    if (response.status === 401) {
+      throw new Error("Please sign in and try again");
+    }
+
+    throw new Error(data?.message || "Something went wrong");
+  }
+
+  return true;
+};

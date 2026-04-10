@@ -39,8 +39,9 @@ const EditUser = ({ setEditUser, setSavedChanges, setUser }) => {
   };
   const completedEdit = () => {
     setSavedChanges(true);
-    updateUserInStorage(name);
-    if (password && newPassword === "") {
+
+    if (password === "" && newPassword === "") {
+      updateUserInStorage(name);
       setUser(name);
     } else {
       setPassword("");

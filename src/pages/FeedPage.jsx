@@ -110,15 +110,6 @@ const FeedPage = () => {
     <>
       <div className="feed-layout">
         <div className="header">
-          {isAdmin && (
-            <div className=" just-self-s">
-              <button onClick={() => setAddingAdmin(true)}>
-                New admin User
-              </button>
-              <button onClick={() => setShowAdminList(true)}>User List</button>
-            </div>
-          )}
-
           <h1>Job Handler</h1>
           <div className="just-self-e row-between">
             <p className="user-edit" onClick={() => setEditUser(true)}>
@@ -149,9 +140,11 @@ const FeedPage = () => {
         )}
         <div className="content-center">
           {addingAdmin && (
-            <div className="show-info">
-              {" "}
-              <Register />{" "}
+            <div className="create-post-overlay">
+              <div className="show-info">
+                {" "}
+                <Register />{" "}
+              </div>
             </div>
           )}
           {addedAdminUser && (
@@ -195,6 +188,16 @@ const FeedPage = () => {
               fetchPosts={fetchPosts}
             />
           )}
+        </div>
+        <div className="flex-row margin-top-1 ">
+          {isAdmin && (
+            <div className=" just-self-s margin-r1">
+              <button onClick={() => setAddingAdmin(true)}>
+                New admin User
+              </button>
+            </div>
+          )}
+          <button onClick={() => setShowAdminList(true)}>User List</button>
         </div>
       </div>
 

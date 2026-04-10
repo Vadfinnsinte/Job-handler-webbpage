@@ -65,80 +65,88 @@ const EditPost = ({ closePost, chosenPost, setChosenPost, fetchPosts }) => {
   };
 
   return (
-    <div className="show-info  edit-post">
-      <div className="row-between">
-        <h2>Edit post</h2>
-        <div className="self-center">
-          <button onClick={() => setOpenDelete(true)}>DELETE</button>
+    <div className="create-post-overlay ">
+      <div className="show-info  edit-post">
+        <div className="row-between">
+          <h2>Edit post</h2>
+          <div className="self-center">
+            <button onClick={() => setOpenDelete(true)}>DELETE</button>
+          </div>
         </div>
-      </div>
-      {openDelete && (
-        <div className="show-info red-small">
+        {openDelete && (
+          <div className="show-info red-small">
+            <InputLabel
+              type={"text"}
+              labelTxt={`Write "DELETE" to remove post`}
+              value={deleteInput}
+              setValue={setDeleteInput}
+            />
+            <p className="error-d">{error}</p>
+            <button onClick={removePost}>DELETE</button>
+
+            <button
+              className="margin-top-1"
+              onClick={() => setOpenDelete(false)}
+            >
+              CANCEL
+            </button>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
           <InputLabel
-            type={"text"}
-            labelTxt={`Write "DELETE" to remove post`}
-            value={deleteInput}
-            setValue={setDeleteInput}
+            type="text"
+            labelTxt="Job Title"
+            value={title}
+            setValue={setTitle}
           />
-          <p className="error-d">{error}</p>
-          <button onClick={removePost}>DELETE</button>
 
-          <button className="margin-top-1" onClick={() => setOpenDelete(false)}>
-            CANCEL
+          <InputLabel
+            type="text"
+            labelTxt="Company Name"
+            value={companyName}
+            setValue={setCompanyName}
+          />
+
+          <InputLabel
+            type="text"
+            labelTxt="Job Link"
+            value={link}
+            setValue={setLink}
+          />
+
+          <InputLabel
+            type="text"
+            labelTxt="Status"
+            value={status}
+            setValue={setStatus}
+          />
+
+          <label>Ad Text</label>
+          <textarea
+            value={adText}
+            onChange={(e) => setAdText(e.target.value)}
+          />
+
+          <InputLabel
+            type="date"
+            labelTxt="Application Date"
+            value={applicationDate}
+            setValue={setApplicationDate}
+          />
+
+          <button type="submit">Save</button>
+          <button
+            type="button"
+            onClick={() => {
+              closePost();
+              setOpenPost(true);
+            }}
+          >
+            Close
           </button>
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <InputLabel
-          type="text"
-          labelTxt="Job Title"
-          value={title}
-          setValue={setTitle}
-        />
-
-        <InputLabel
-          type="text"
-          labelTxt="Company Name"
-          value={companyName}
-          setValue={setCompanyName}
-        />
-
-        <InputLabel
-          type="text"
-          labelTxt="Job Link"
-          value={link}
-          setValue={setLink}
-        />
-
-        <InputLabel
-          type="text"
-          labelTxt="Status"
-          value={status}
-          setValue={setStatus}
-        />
-
-        <label>Ad Text</label>
-        <textarea value={adText} onChange={(e) => setAdText(e.target.value)} />
-
-        <InputLabel
-          type="date"
-          labelTxt="Application Date"
-          value={applicationDate}
-          setValue={setApplicationDate}
-        />
-
-        <button type="submit">Save</button>
-        <button
-          type="button"
-          onClick={() => {
-            closePost();
-            setOpenPost(true);
-          }}
-        >
-          Close
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

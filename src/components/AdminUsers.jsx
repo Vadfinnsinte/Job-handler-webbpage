@@ -22,10 +22,13 @@ const AdminUserList = ({ closeList }) => {
   }, []);
 
   return (
-    <div className="admin-user-list">
+    <div className="admin-user-list self-center">
       <div className="admin-user-list-header">
         <h2>All users</h2>
-        <button onClick={closeList}>Close</button>
+
+        <button onClick={closeList} type="button" className="close-btn">
+          ✕
+        </button>
       </div>
 
       {loading && <p>Loading users...</p>}

@@ -6,6 +6,7 @@ import ShowPost from "../components/ShowPost";
 import { getRole, removeToken } from "../functions/helpers/token";
 import { useNavigate } from "react-router-dom";
 import Register from "./Register";
+import EditUser from "../components/EditUser";
 
 const FeedPage = () => {
   const {
@@ -19,6 +20,7 @@ const FeedPage = () => {
     addedAdminUser,
     setAddedAdminUser,
   } = storeHooks();
+  const [editUser, setEditUser] = useState(false);
   const [loading, setLoading] = useState(false);
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
@@ -80,8 +82,15 @@ const FeedPage = () => {
           )}
 
           <h1>Job Handler</h1>
-          <div className="just-self-e">
-            <button onClick={signOutUser}>Sign Out</button>
+          <div className="just-self-e row-between">
+            <p className="user-edit" onClick={() => setEditUser(true)}>
+              {role.name}
+              <span>✎</span>
+            </p>
+            <div className="self-center">
+              <button onClick={signOutUser}>Sign Out</button>
+            </div>
+            {editUser && <EditUser setEditUser={setEditUser} />}
           </div>
         </div>
         <div className="content-center">

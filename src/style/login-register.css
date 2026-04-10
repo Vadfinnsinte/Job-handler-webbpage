@@ -41,8 +41,8 @@
 
 .error {
   text-align: center;
-  color: var(--accent-c);
-  font-size: 10px;
+  color: rgb(114, 26, 5);
+  font-size: 0.9rem;
 }
 .invisible {
   visibility: hidden;

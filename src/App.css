@@ -54,6 +54,9 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
+.flex-row {
+  display: flex;
+}
 .flex {
   display: flex;
   flex-direction: column;

@@ -285,3 +285,20 @@
   color: var(--white);
   text-align: center;
 }
+@media (max-width: 770px) {
+  .header {
+    grid-template-columns: 1fr 1fr;
+
+    h1 {
+      grid-column: 1;
+    }
+  }
+}
+@media (max-width: 435px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+  .header div {
+    place-self: center;
+  }
+}

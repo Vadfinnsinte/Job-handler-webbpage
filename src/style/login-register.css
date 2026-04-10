@@ -44,3 +44,6 @@
   color: rgb(114, 26, 5);
   font-size: 0.9rem;
 }
+.invisible {
+  visibility: hidden;
+}

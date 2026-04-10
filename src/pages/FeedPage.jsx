@@ -7,6 +7,7 @@ import ShowPost from "../components/ShowPost";
 import { getRole, removeToken } from "../functions/helpers/token";
 import { useNavigate } from "react-router-dom";
 import Register from "./Register";
+import EditUser from "../components/EditUser";
 
 const FeedPage = () => {
   const [openAddPost, setOpenAddPost] = useState(false);
@@ -22,9 +23,12 @@ const FeedPage = () => {
     addedAdminUser,
     setAddedAdminUser,
   } = storeHooks();
+  const [editUser, setEditUser] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [savedChanges, setSavedChanges] = useState(false);
   const [sort, setSort] = useState("newest");
   const [errorTxt, setErrorTxt] = useState("Loading...");
+  const [user, setUser] = useState("");
 
   // Fetch posts
   const fetchPosts = async () => {
@@ -80,6 +84,7 @@ const FeedPage = () => {
     setPosts(sortedPosts);
   };
   useEffect(() => {
+    setUser(role.name);
     if (role?.roles?.[0] === "Admin") {
       setIsAdmin(true);
     } else {
@@ -110,8 +115,26 @@ const FeedPage = () => {
           )}
 
           <h1>Job Handler</h1>
-          <div className="just-self-e">
-            <button onClick={signOutUser}>Sign Out</button>
+          <div className="just-self-e row-between">
+            <p className="user-edit" onClick={() => setEditUser(true)}>
+              {user}
+              <span>✎</span>
+            </p>
+            <div className="self-center">
+              <button onClick={signOutUser}>Sign Out</button>
+            </div>
+            {editUser && (
+              <EditUser
+                setEditUser={setEditUser}
+                setSavedChanges={setSavedChanges}
+                setUser={setUser}
+              />
+            )}
+            {savedChanges && (
+              <div className="show-info white">
+                <p>Changes saved</p>
+              </div>
+            )}
           </div>
         </div>
         <div className="content-center">
@@ -154,8 +177,6 @@ const FeedPage = () => {
           </div>
 
           {chosenPost !== null && <ShowPost />}
-          {/* add conditional for chosenPost(display <ShowPost/> when it is not "")  */}
-          {/* add conditonal for edit post so it displays when clicking edit in showPost component  */}
         </div>
       </div>
 

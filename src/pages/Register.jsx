@@ -20,36 +20,34 @@ const Register = () => {
   const navigate = useNavigate();
 
   const registerNewUser = async () => {
-  if (btnTxT === "Signing up...") return;
-  // VALIDATION
-  if (!email || !password || !userName || !name) {
-    setError("All fields are required");
-    return;
-  }
-
-  try {
-    setError("");
-    setbtnTxT("Signing up...");
-
-    await registerUser(email, password, userName, name, addingAdmin, isAdmin);
-    await signInUser(email, password);
-
-    if (!addingAdmin && !isAdmin) {
-      navigate("/feed");
-    } else {
-      setAddingAdmin(false);
-      setAddedAdminUser(true);
+    if (btnTxT === "Signing up...") return;
+    // VALIDATION
+    if (!email || !password || !userName || !name) {
+      setError("All fields are required");
+      return;
     }
 
-  } catch (err) {
-    let message = err.message;
-    message = message.replace(/[\[\]"]/g, "");
-    setError(message);
+    try {
+      setError("");
+      setbtnTxT("Signing up...");
 
-  } finally {
-    setbtnTxT("Sign up");
-  }
-};
+      await registerUser(email, password, userName, name, addingAdmin, isAdmin);
+
+      if (!addingAdmin && !isAdmin) {
+        await signInUser(email, password);
+        navigate("/feed");
+      } else {
+        setAddingAdmin(false);
+        setAddedAdminUser(true);
+      }
+    } catch (err) {
+      let message = err.message;
+      message = message.replace(/[\[\]"]/g, "");
+      setError(message);
+    } finally {
+      setbtnTxT("Sign up");
+    }
+  };
 
   return (
     <div className="sign-up-in-layout">

@@ -148,7 +148,7 @@ const FeedPage = () => {
             </div>
           )}
           {addedAdminUser && (
-            <div className="show-info white">
+            <div className="show-info white top">
               <p>User added</p>{" "}
               <button onClick={() => setAddedAdminUser(false)}>Close</button>
             </div>
@@ -191,13 +191,16 @@ const FeedPage = () => {
         </div>
         <div className="flex-row margin-top-1 ">
           {isAdmin && (
-            <div className=" just-self-s margin-r1">
-              <button onClick={() => setAddingAdmin(true)}>
+            <div className=" just-self-s ">
+              <button
+                className="margin-r1"
+                onClick={() => setAddingAdmin(true)}
+              >
                 New admin User
               </button>
+              <button onClick={() => setShowAdminList(true)}>User List</button>
             </div>
           )}
-          <button onClick={() => setShowAdminList(true)}>User List</button>
         </div>
       </div>
 

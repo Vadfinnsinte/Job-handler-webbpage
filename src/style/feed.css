@@ -116,6 +116,10 @@
   color: var(--accent-c);
   overflow: hidden;
 }
+.show-info.white.top {
+  min-width: auto;
+  top: 30%;
+}
 .show-info.red-small {
   background-color: rgb(114, 26, 5);
 }

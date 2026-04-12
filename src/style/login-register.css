@@ -1,0 +1,49 @@
+.sign-up-in-layout {
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  h1 {
+    text-align: center;
+    color: var(--bg-dark);
+  }
+}
+.sign-up-in-container {
+  margin: auto;
+  background-color: var(--bg-dark);
+  padding: 1rem 3rem 3rem 3rem;
+  border-radius: 6px;
+  position: relative;
+  h2 {
+    text-align: center;
+    color: var(--accent-c);
+  }
+}
+.input-label-layout {
+  display: flex;
+  flex-direction: column;
+}
+.btn-line-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.line {
+  border-top: 1px solid var(--white);
+  min-width: 3rem;
+  height: 1px;
+}
+.input-label-container {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  text-align: center;
+  color: rgb(114, 26, 5);
+  font-size: 0.9rem;
+}
+.invisible {
+  visibility: hidden;
+}

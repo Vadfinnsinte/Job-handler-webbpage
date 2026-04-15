@@ -40,7 +40,6 @@ const ShowPost = () => {
         setAddingComment(false);
         setCommentAdded(true);
         setCommentInput("");
-        set;
       } catch (err) {
         console.log(err.message);
       }
